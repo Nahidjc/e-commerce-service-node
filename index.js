@@ -14,7 +14,7 @@ app.use(cors());
 app.use(cookieParser());
 
 mongoose
-    .connect(`mongodb+srv://${username}:${password}@cluster0.5nvzpqp.mongodb.net/?retryWrites=true&w=majority`, {
+    .connect(`mongodb+srv://nahid:nahidhasan@cluster0.5nvzpqp.mongodb.net/e-commerce?retryWrites=true&w=majority`, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
