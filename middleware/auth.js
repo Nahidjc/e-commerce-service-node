@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const { ACCESS_TOKEN_SECRET } = require("../variables");
 
 const Auth = (req, res, next) => {
   try {
@@ -6,7 +7,7 @@ const Auth = (req, res, next) => {
     if (!token) {
       return res.status(400).json({ msg: "Invalid Athentication." });
     }
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    jwt.verify(token, ACCESS_TOKEN_SECRET, (err, user) => {
       if (err) {
         return res.status(400).json({ msg: "Invalid Athentication." });
       }
