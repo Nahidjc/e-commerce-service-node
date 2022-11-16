@@ -73,11 +73,9 @@ exports.login = async (req, res) => {
 
 
 const createAccessToken = (user) => {
-  console.log(user);
   return jwt.sign(user, ACCESS_TOKEN_SECRET, { expiresIn: "1d" });
 };
 
 const createRefreshToken = (user) => {
-  console.log(user);
   return jwt.sign(user, REFRESH_TOKEN_SECRET, { expiresIn: "7d" });
 };
