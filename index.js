@@ -38,6 +38,7 @@ function errorHandler(err, req, res, next) {
 
 
 app.use("/user", require("./routes/userRoutes"));
+app.use("/admin", require("./routes/adminRoutes"));
 
 
 app.listen(appPort, () => {
