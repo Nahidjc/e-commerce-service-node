@@ -5,8 +5,6 @@ const { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } = require("../variables");
 exports.signup = async (req, res) => {
   try {
     const { fullName, userName, password, rePassword, email } = req.body;
-
-    console.log(fullName, userName, password, rePassword, email);
     if (!fullName || !userName || !password || !rePassword || !email) {
       return res.status(400).json({ message: "Invalid Creadentials." });
     }
@@ -69,11 +67,9 @@ exports.login = async (req, res) => {
 
 
 const createAccessToken = (user) => {
-  console.log(user);
   return jwt.sign(user, ACCESS_TOKEN_SECRET, { expiresIn: "1d" });
 };
 
 const createRefreshToken = (user) => {
-  console.log(user);
   return jwt.sign(user, REFRESH_TOKEN_SECRET, { expiresIn: "7d" });
 };

@@ -18,3 +18,7 @@ exports.create = data => {
     if (userExists) return true;
     return false;
   };
+  exports.findUserById = async id => {
+    const user = await UserModel.findById(id);
+    return user;
+  };

@@ -10,16 +10,14 @@ const authAdmin = async (req, res, next) => {
       if (err) {
         return res.status(400).json({ message: "Invalid Authentication" });
       }
-      
       req.user = user;
-      const admin = await User.findOne({
-        _id: user.id,
-      });
-      if (admin.role === "admin" ) {
-        next();
+      const admin = await User.findUserById(user.id);
+   
+      if (admin.role !== "admin" ) {
+        return res.status(400).json({ msg: "Admin Recources Access Denied." });
       
       }
-      return res.status(400).json({ msg: "Admin Recources Access Denied." });
+      next();
 
     });
   } catch (error) {

@@ -15,26 +15,25 @@ exports.productUpload = async (req, res) => {
   };
   try {
     const { name, brand, user, category, description, price, countInStock } =
-      req.body;
+      req.body;;
     const file = await req.file;
-    const result = await cloudinary.uploader.upload(file.path, options);
+    // const result = await cloudinary.uploader.upload(file.path, options);
  
-    const data = {
-      name,
-      brand,
-      user,
-      category,
-      description,
-      price,
-      countInStock,
-      image: result.url,
-    };
-    const product = await productModel.upload(data);
+    // const data = {
+    //   name,
+    //   brand,
+    //   user,
+    //   category,
+    //   description,
+    //   price,
+    //   countInStock,
+    //   image: result.url,
+    // };
+    // const product = await productModel.upload(data);
     fs.unlink(file.path, function (err) {
         if (err) throw err;
       });
     res.send({
-      productId: product._id,
       message: "Product Upload Successfully",
     });
   } catch (e) {
