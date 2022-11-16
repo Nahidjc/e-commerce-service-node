@@ -5,6 +5,10 @@ const productRatingSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
   },
+  product:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "products",
+  },
   rating: {
     type: Number,
     require: true,
@@ -41,11 +45,6 @@ const productSchema = mongoose.Schema(
     brand: {
       type: String,
       require: true,
-    },
-    rating: [productRatingSchema],
-    numReviewers: {
-      type: Number,
-      default: 0,
     },
     price: {
       type: Number,

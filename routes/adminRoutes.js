@@ -1,5 +1,4 @@
 const { signup, login } = require("../controllers/adminController");
-
 const router = require("express").Router();
 
 
