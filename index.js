@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
-const { username, password, appPort } = require("./variables");
+const {  appPort } = require("./variables");
 
 
 const app = express();
@@ -39,6 +39,7 @@ function errorHandler(err, req, res, next) {
 
 app.use("/user", require("./routes/userRoutes"));
 app.use("/admin", require("./routes/adminRoutes"));
+app.use("/product", require("./routes/productRoutes"));
 
 
 app.listen(appPort, () => {

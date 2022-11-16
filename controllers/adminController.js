@@ -53,8 +53,8 @@ exports.login = async (req, res) => {
         return res.status(400).json({ msg: "You are Not Admin" });
     }
 
-    const accessToken = createAccessToken({ id: user._id });
-    const refreshToken = createRefreshToken({ id: user._id });
+    const accessToken = createAccessToken({ id: user._id ,role: user.role});
+    const refreshToken = createRefreshToken({ id: user._id ,role: user.role});
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
