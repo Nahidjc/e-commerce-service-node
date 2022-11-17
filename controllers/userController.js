@@ -64,6 +64,24 @@ exports.login = async (req, res) => {
   }
 };
 
+exports.logout= async (req, res) => {
+  try {
+    const rf_token = req.cookies.refreshToken;
+    if (!rf_token) {
+      return res.status(400).json({ msg: "Please Login or Register." });
+  }
+    res.clearCookie("refreshToken", {
+      httpOnly: true,
+      expires: new Date(0),
+      secure: true,
+      sameSite: "none",
+    });
+    return res.json({ msg: "Logged Out" });
+  } catch (error) {
+    return res.status(500).json({ msg: error.message });
+  }
+}
+
 
 
 const createAccessToken = (user) => {
