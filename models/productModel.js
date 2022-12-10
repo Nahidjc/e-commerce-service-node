@@ -10,3 +10,8 @@ exports.GetAllProducts = async () => {
   const products = await ProductModel.find()
   return products
 }
+
+exports.getProductById = async (productId) => {
+  const product = await ProductModel.findById(productId).exec()
+  return product
+}

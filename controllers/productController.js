@@ -44,18 +44,33 @@ exports.productUpload = async (req, res) => {
   }
 };
 
+exports.getProductById = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const product = await productModel.getProductById(productId)
+    res.send({
+      product: product,
+      message: "Product fetched Successfully",
+    });
+
+  } catch (e) {
+    return res.status(500).json({
+      error: e.message,
+    });
+  }
+}
 
 exports.getAllProducts = async (req, res) => {
   try {
     const products = await productModel.GetAllProducts()
     res.send({
       products: products,
-      message: "Product fetched Successfully",
+      message: "Products fetched Successfully",
     });
 
   } catch (e) {
     return res.status(500).json({
-      error: e.response,
+      error: e.message,
     });
   }
 }
