@@ -42,34 +42,52 @@ exports.login = async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({ message: "Invalid Creadentials." });
     }
-    const user = await userModel.doesExists( email );
+    const user = await userModel.doesExists(email);
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ msg: "Password Doesn't Match." });
     }
-    const accessToken = createAccessToken({ id: user._id });
-    const refreshToken = createRefreshToken({ id: user._id });
+    const accessToken = createAccessToken({
+      id: user._id, fullName: user.fullName,
+      email: user.email,
+      userName: user.userName,
+      role: user.role
+    });
+    const refreshToken = createRefreshToken({
+      id: user._id,
+      fullName: user.fullName,
+      email: user.email,
+      userName: user.userName,
+      role: user.role
+    });
 
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
     });
 
-    res.json({ accessToken });
+    const userDetails = {
+      id: user._id,
+      fullName: user.fullName,
+      email: user.email,
+      userName: user.userName,
+      role: user.role
+    }
+
+    res.json({ accessToken, "message": "Login Successfully", user: userDetails });
   } catch (e) {
-    console.log(e);
     return res.status(500).json({
-      error: e,
+      error: e.message,
       message: "Invalid Creadentials.",
     });
   }
 };
 
-exports.logout= async (req, res) => {
+exports.logout = async (req, res) => {
   try {
     const rf_token = req.cookies.refreshToken;
     if (!rf_token) {
       return res.status(400).json({ msg: "Please Login or Register." });
-  }
+    }
     res.clearCookie("refreshToken", {
       httpOnly: true,
       expires: new Date(0),
