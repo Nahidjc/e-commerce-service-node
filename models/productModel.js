@@ -1,7 +1,12 @@
-const ProductModel  = require("../schema/productSchema");
+const ProductModel = require("../schema/productSchema");
 
 
-exports.upload = data => {
-    const product = new ProductModel(data);
-    return product.save();
-  };
+exports.upload = async (data) => {
+  const product = await new ProductModel(data);
+  return product.save();
+};
+
+exports.GetAllProducts = async () => {
+  const products = await ProductModel.find()
+  return products
+}
