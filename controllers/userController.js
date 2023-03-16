@@ -40,12 +40,12 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      return res.status(400).json({ message: "Invalid Creadentials." });
+      return res.status(400).json({ message: "Invalid Creadentials.", statusCode: 400 });
     }
     const user = await userModel.doesExists(email);
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ msg: "Password Doesn't Match." });
+      return res.status(400).json({ message: "Password Doesn't Match.", statusCode: 400 });
     }
     const accessToken = createAccessToken({
       id: user._id, fullName: user.fullName,
@@ -73,10 +73,11 @@ exports.login = async (req, res) => {
       role: user.role
     }
 
-    res.json({ accessToken, "message": "Login Successfully", user: userDetails });
+    res.json({ accessToken, "message": "Login Successfully", user: userDetails, statusCode: 200 });
   } catch (e) {
     return res.status(500).json({
       error: e.message,
+      statusCode: 500,
       message: "Invalid Creadentials.",
     });
   }
