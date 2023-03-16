@@ -45,7 +45,7 @@ exports.login = async (req, res) => {
     const user = await userModel.doesExists(email);
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Password Doesn't Match.", statusCode: 400 });
+      return res.status(404).json({ message: "Password Doesn't Match.", statusCode: 404 });
     }
     const accessToken = createAccessToken({
       id: user._id, fullName: user.fullName,
