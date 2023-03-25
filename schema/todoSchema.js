@@ -9,7 +9,15 @@ const todoSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    completed: {
+    dueDate: {
+        type: Date,
+        required: true
+    },
+    isPublic: {
+        type: Boolean,
+        default: false
+    },
+    isCompleted: {
         type: Boolean,
         default: false
     }
