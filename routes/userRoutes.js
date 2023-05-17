@@ -6,7 +6,7 @@ const router = require("express").Router();
 
 router.post("/register", signup);
 router.post("/login", login);
-router.post("/logout",Auth, logout);
+router.post("/logout", Auth, logout);
 // router.get("/refresh_token", userController.refreshToken);
 
 
