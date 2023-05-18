@@ -41,6 +41,7 @@ app.use("/user", require("./routes/userRoutes"));
 app.use("/admin", require("./routes/adminRoutes"));
 app.use("/product", require("./routes/productRoutes"));
 app.use("/todo", require("./routes/todoRoutes"));
+app.use("/payment", require("./routes/paymentRoutes"));
 
 
 app.listen(appPort, () => {
